@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neural Style Transfer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c3a);
+            font-family: 'Segoe UI', sans-serif;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 6px #000;
+        }
+
+        form {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .grid-all-three {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #2d2d3c;
+            padding: 20px;
+            width: 280px;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #f8f8f8;
+        }
+
+        input[type="file"] {
+            margin-bottom: 12px;
+        }
+
+        .preview {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #444;
+        }
+
+        .stylize-btn {
+            font-size: 18px;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #7e4fff, #ae7bff);
+            color: white;
+            box-shadow: 0 0 20px #ae7bff80;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stylize-btn:hover {
+            transform: scale(1.06);
+        }
+
+        .loader {
+            border: 6px solid #444;
+            border-top: 6px solid #ae7bff;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 15px;
+            color: #b689ff;
+            text-decoration: none;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .grid-all-three {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Artistic Style Transfer</h1>
+
+    <form method="POST" enctype="multipart/form-data" action="/stylize" id="uploadForm">
+        <div class="grid-all-three">
+            <!-- Content Image -->
+            <div class="card">
+                <h3>🖼️ Content</h3>
+                <input type="file" name="content" accept="image/*" onchange="previewImage(event, 'contentPreview')">
+                <img id="contentPreview" class="preview"
+                     src="{% if content_image %}{{ url_for('static', filename=content_image) }}{% endif %}" />
+            </div>
+
+            <!-- Style Image -->
+            <div class="card">
+                <h3>🎨 Style</h3>
+                <input type="file" name="style" accept="image/*" onchange="previewImage(event, 'stylePreview')">
+                <img id="stylePreview" class="preview"
+                     src="{% if style_image %}{{ url_for('static', filename=style_image) }}{% endif %}" />
+            </div>
+
+            <!-- Output Image -->
+            <div class="card">
+                <h3>🌈 Output</h3>
+                {% if output_image %}
+                    <img class="preview" src="{{ url_for('static', filename=output_image) }}" />
+                    <a href="/download" class="download-link">📥 Download</a>
+                {% else %}
+                    <p class="preview" style="line-height: 200px;">Awaiting</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <button class="stylize-btn" type="submit" onclick="showLoader()">⚡ Stylize</button>
+        <div class="loader" id="loader"></div>
+    </form>
+
+    <script>
+        function previewImage(event, previewId) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                document.getElementById(previewId).src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function showLoader() {
+            document.querySelector('.stylize-btn').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
