@@ -7,9 +7,6 @@ This is a Flask-based web application that applies **neural style transfer** to 
 ## 🖼️ Demo
 
 Upload two images — one for content and one for style — and the app will generate a stylized output image.
-
-![screenshot](static/demo/demo-ui.png) <!-- Replace with actual path or link when ready -->
-
 ---
 
 ## 🚀 Features
@@ -37,20 +34,6 @@ This app uses the **Gatys et al.** technique of neural style transfer. A pre-tra
 - **Image Handling**: `PIL`, `torchvision`, `werkzeug`
 
 ---
-
-## 📦 Installation
-
-```bash
-git clone https://github.com/your-username/neural-style-transfer-app.git
-cd neural-style-transfer-app
-pip install -r requirements.txt
-python app.py
-````
-
-> App will run on `http://127.0.0.1:5000/`
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -65,32 +48,10 @@ neural-style-transfer/
 │   ├── output/
 │   └── demo/ (optional screenshot)
 ```
-
----
-
-## 🧠 Sample Output
-
-|                      Content                     |                      Style                     |                      Output                     |
-| :----------------------------------------------: | :--------------------------------------------: | :---------------------------------------------: |
-| <img src="static/demo/content.jpg" width="150"/> | <img src="static/demo/style.jpg" width="150"/> | <img src="static/demo/output.jpg" width="150"/> |
-
 ---
 
 ## 📥 Download Output
 
 After generating the stylized image, click the **📥 Download** button to save the final output.
-
----
-
-## 🙌 Acknowledgments
-
-* [PyTorch VGG19 pretrained model](https://pytorch.org/vision/stable/models/generated/torchvision.models.vgg19.html)
-* [Neural Style Transfer paper (Gatys et al.)](https://arxiv.org/abs/1508.06576)
-
----
-
-## 📃 License
-
-MIT License
 
 ---
