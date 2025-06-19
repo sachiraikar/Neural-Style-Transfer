@@ -13,7 +13,7 @@ Upload two images — one for content and one for style — and the app will gen
 
 - Upload **Content** and **Style** images
 - Live image **preview** before stylizing
-- AI-based **style transfer** with VGG19
+- AI-based **style transfer** with SqueezeNet
 - See and **download the result**
 - Dark-themed, **modern UI** with circular loader
 - No scroll layout – All images visible side-by-side
@@ -22,7 +22,7 @@ Upload two images — one for content and one for style — and the app will gen
 
 ## 💡 How It Works
 
-This app uses the **Gatys et al.** technique of neural style transfer. A pre-trained **VGG19** extracts content and style features from the input images, and the output image is optimized to match content and style simultaneously.
+This app uses the **Gatys et al.** technique of neural style transfer. A pre-trained **SqueezeNet** extracts content and style features from the input images, and the output image is optimized to match content and style simultaneously.
 
 ---
 
